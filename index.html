@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منصة منحة 5000 دج - النسخة الكاملة 2026</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f7f6; padding: 20px; direction: rtl; margin-bottom: 80px; }
+        .container { max-width: 1750px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .header-official { border-bottom: 3px double #333; margin-bottom: 20px; padding-bottom: 10px; }
+        .top-info-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 10px; }
+        .right-geo, .left-school { font-weight: bold; line-height: 1.8; }
+        
+        .stats-banner {
+            background: #2c3e50; color: white; padding: 12px; border-radius: 8px; 
+            margin-bottom: 20px; text-align: center; font-size: 18px; font-weight: bold;
+        }
+
+        .form-section { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 10px; background: #eef2f3; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;
+        }
+        input, select { padding: 8px; border: 1px solid #bbb; border-radius: 5px; font-size: 13px; }
+        
+        .filter-bar { 
+            background: #d1ecf1; padding: 15px; border-radius: 8px; margin-bottom: 20px; 
+            display: flex; gap: 15px; align-items: center; border: 1px solid #bee5eb; flex-wrap: wrap;
+        }
+
+        .backup-zone {
+            background: #fdf3d8; border: 1px solid #ffeeba; padding: 10px; border-radius: 8px; margin-bottom: 20px;
+            display: flex; gap: 10px; align-items: center; font-size: 14px; flex-wrap: wrap;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #2c3e50; color: white; padding: 10px; border: 1px solid #000; font-size: 11px; }
+        td { border: 1px solid #000; padding: 6px; text-align: center; font-size: 10.5px; }
+        .parent-img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; border: 1px solid #ccc; }
+
+        .btn { border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-print { background: #34495e; color: white; }
+        .btn-export { background: #8e44ad; color: white; }
+        .btn-import { background: #d35400; color: white; }
+        .btn-reset { background: #c0392b; color: white; margin-right: auto; }
+        .btn-reset:hover { background: #e74c3c; }
+        .btn-add { background: #27ae60; color: white; grid-column: span 2; font-size: 16px; }
+
+        /* تنسيق أيقونات التواصل الاجتماعي */
+        .social-footer { position: fixed; bottom: 20px; left: 20px; display: flex; gap: 8px; z-index: 1000; direction: ltr; }
+        .social-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 14px; font-weight: bold; box-shadow: 0 3px 8px rgba(0,0,0,0.3); transition: 0.3s; }
+        .social-icon:hover { transform: translateY(-5px); }
+        .fb { background: #1877F2; } .wa { background: #25D366; } .ig { background: #E4405F; } .tk { background: #000000; } .yt { background: #FF0000; } .gm { background: #D44638; } .tg { background: #0088CC; }
+
+        /* منطقة الإعلانات */
+        .ads-container { text-align: center; margin: 15px 0; min-height: 90px; background: #f9f9f9; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { padding: 0; margin-bottom: 0; }
+            .container { width: 100%; max-width: 100%; border: none; box-shadow: none; }
+            @page { size: landscape; margin: 0.5cm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-official">
+        <h2 style="text-align: center;">الجمهورية الجزائرية الديمقراطية الشعبية</h2>
+        <div class="top-info-flex">
+            <div class="right-geo">
+                <div>ولاية: <span id="valWilaya">غليزان</span></div>
+                <div>دائرة: <span id="valDaira">غليزان</span></div>
+                <div>بلدية: <span id="valCommune">غليزان</span></div>
+            </div>
+            <div class="left-school">
+                <div>المؤسسة: <span id="valSchool">بنايش بلبشير</span></div>
+            </div>
+        </div>
+        <h3 id="displayTitle" style="text-align: center;">قائمة التلاميذ المستفيدين من منحة 5000 دج</h3>
+        <p style="text-align: center; font-weight: bold;">العدد الإجمالي في هذه القائمة: <span id="printTotal">0</span> تلميذ</p>
+    </div>
+
+    <div class="ads-container no-print">
+        <p style="color: #999; font-size: 12px;">مساحة إعلانية (سيظهر الإعلان هنا بعد وضع كود Adsterra)</p>
+    </div>
+
+    <div class="stats-banner no-print">
+        📊 إجمالي التلاميذ المعروضين حالياً: <span id="totalCount">0</span> تلميذ
+    </div>
+
+    <div class="backup-zone no-print">
+        <strong>⚙️ الإعدادات:</strong>
+        <input type="text" id="inWilaya" placeholder="الولاية" oninput="updateHeader()">
+        <input type="text" id="inDaira" placeholder="الدائرة" oninput="updateHeader()">
+        <input type="text" id="inCommune" placeholder="البلدية" oninput="updateHeader()">
+        <input type="text" id="inSchool" placeholder="المؤسسة" oninput="updateHeader()">
+    </div>
+
+    <div class="backup-zone no-print">
+        <strong>💾 التحكم بالبيانات:</strong>
+        <button onclick="exportData()" class="btn btn-export">📥 تصدير نسخة احتياطية</button>
+        <label for="importFile" class="btn btn-import">📤 استيراد من ملف</label>
+        <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+        <button onclick="clearAllData()" class="btn btn-reset">⚠️ تفريغ كل البيانات</button>
+    </div>
+
+    <div class="form-section no-print">
+        <input type="text" id="sid" placeholder="الرقم التعريفي">
+        <input type="text" id="slast" placeholder="لقب التلميذ">
+        <input type="text" id="sfirst" placeholder="اسم التلميذ">
+        <input type="date" id="sbirth">
+        <select id="slevel">
+            <option value="التحضيري">تحضيري</option>
+            <option value="الأولى">الأولى</option>
+            <option value="الثانية">الثانية</option>
+            <option value="الثالثة">الثالثة</option>
+            <option value="الرابعة">الرابعة</option>
+            <option value="الخامسة">الخامسة</option>
+        </select>
+        <input type="text" id="plast" placeholder="لقب الولي">
+        <input type="text" id="pfirst" placeholder="اسم الولي">
+        <input type="text" id="pccp" placeholder="رقم CCP">
+        <select id="pcat">
+            <option value="عدم العمل">عدم العمل</option>
+            <option value="دخل ضعيف">دخل ضعيف</option>
+        </select>
+        <input type="text" id="sSchoolTable" placeholder="المؤسسة">
+        <input type="text" id="sCityTable" placeholder="البلدية">
+        <input type="file" id="pimg" accept="image/*">
+        <button onclick="processAndSave()" class="btn btn-add">✅ إضافة تلميذ جديد وحفظ</button>
+    </div>
+
+    <div class="filter-bar no-print">
+        <strong>🔍 بحث:</strong>
+        <input type="text" id="searchBox" placeholder="ابحث بالاسم، اللقب أو الرقم..." oninput="updateView()" style="flex-grow: 1; border: 2px solid #3498db;">
+        
+        <strong>📂 المستوى:</strong>
+        <select id="filterLevel" onchange="updateView()" style="border: 2px solid #3498db; font-weight: bold;">
+            <option value="الكل">عرض كل المستويات</option>
+            <option value="الخامسة">السنة الخامسة</option>
+            <option value="الرابعة">السنة الرابعة</option>
+            <option value="الثالثة">السنة الثالثة</option>
+            <option value="الثانية">السنة الثانية</option>
+            <option value="الأولى">السنة الأولى</option>
+            <option value="التحضيري">التحضيري</option>
+        </select>
+        <button onclick="window.print()" class="btn btn-print">🖨️ طباعة القائمة</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>رقم</th>
+                <th>الصورة</th>
+                <th>الرقم التعريفي</th>
+                <th>لقب التلميذ</th>
+                <th>اسم التلميذ</th>
+                <th>تاريخ الميلاد</th>
+                <th>المستوى</th>
+                <th>لقب الولي</th>
+                <th>اسم الولي</th>
+                <th>رقم CCP</th>
+                <th>الفئة</th>
+                <th>المؤسسة</th>
+                <th>البلدية</th>
+                <th class="no-print">إجراءات</th>
+            </tr>
+        </thead>
+        <tbody id="mainTable"></tbody>
+    </table>
+</div>
+
+<div class="social-footer no-print">
+    <a href="https://www.facebook.com/banaaich.elbachir" class="social-icon fb" title="فيسبوك" target="_blank">F</a>
+    <a href="https://wa.me/213xxxxxxxxx" class="social-icon wa" title="واتساب" target="_blank">W</a>
+    <a href="#" class="social-icon ig" title="إنستغرام" target="_blank">I</a>
+    <a href="#" class="social-icon tk" title="تيك توك" target="_blank">T</a>
+    <a href="#" class="social-icon yt" title="يوتيوب" target="_blank">Y</a>
+    <a href="mailto:yourname@gmail.com" class="social-icon gm" title="إرسال بريد">@</a>
+    <a href="#" class="social-icon tg" title="تلغرام" target="_blank">L</a>
+</div>
+
+<script>
+    let students = JSON.parse(localStorage.getItem('minha_relizane_v4')) || [];
+
+    function updateHeader() {
+        if(document.getElementById('inWilaya').value) document.getElementById('valWilaya').innerText = document.getElementById('inWilaya').value;
+        if(document.getElementById('inDaira').value) document.getElementById('valDaira').innerText = document.getElementById('inDaira').value;
+        if(document.getElementById('inCommune').value) document.getElementById('valCommune').innerText = document.getElementById('inCommune').value;
+        if(document.getElementById('inSchool').value) document.getElementById('valSchool').innerText = document.getElementById('inSchool').value;
+    }
+
+    function processAndSave() {
+        const file = document.getElementById('pimg').files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => save(e.target.result);
+            reader.readAsDataURL(file);
+        } else { save(""); }
+    }
+
+    function save(imgData) {
+        const data = {
+            id: document.getElementById('sid').value,
+            slast: document.getElementById('slast').value,
+            sfirst: document.getElementById('sfirst').value,
+            birth: document.getElementById('sbirth').value,
+            level: document.getElementById('slevel').value,
+            plast: document.getElementById('plast').value,
+            pfirst: document.getElementById('pfirst').value,
+            ccp: document.getElementById('pccp').value,
+            cat: document.getElementById('pcat').value,
+            school: document.getElementById('sSchoolTable').value,
+            city: document.getElementById('sCityTable').value,
+            img: imgData
+        };
+        if(!data.id || !data.slast) return alert("الرجاء إدخال البيانات الأساسية (الرقم واللقب)");
+        students.push(data);
+        localStorage.setItem('minha_relizane_v4', JSON.stringify(students));
+        updateView();
+        
+        const fields = ['sid','slast','sfirst','sbirth','plast','pfirst','pccp','sSchoolTable','sCityTable','pimg'];
+        fields.forEach(f => document.getElementById(f).value = "");
+    }
+
+    function clearAllData() {
+        if (confirm("⚠️ تنبيه: هل تريد حقاً مسح جميع بيانات التلاميذ نهائياً؟")) {
+            if (confirm("تأكيد أخير: لا يمكن التراجع عن هذه العملية!")) {
+                students = [];
+                localStorage.removeItem('minha_relizane_v4');
+                updateView();
+                alert("تم إفراغ قاعدة البيانات بنجاح.");
+            }
+        }
+    }
+
+    function updateView() {
+        const filterValue = document.getElementById('filterLevel').value;
+        const searchText = document.getElementById('searchBox').value.toLowerCase();
+        const titleElement = document.getElementById('displayTitle');
+        const countDisplay = document.getElementById('totalCount');
+        const countPrint = document.getElementById('printTotal');
+
+        let filteredData = students.filter(s => {
+            const matchesLevel = (filterValue === "الكل") || (s.level === filterValue);
+            const matchesSearch = (s.sfirst.toLowerCase().includes(searchText)) || 
+                                  (s.slast.toLowerCase().includes(searchText)) || 
+                                  (s.id.includes(searchText));
+            return matchesLevel && matchesSearch;
+        });
+        
+        titleElement.innerText = (filterValue === "الكل") ? 
+            "قائمة التلاميذ المستفيدين من منحة 5000 دج" : 
+            "قائمة التلاميذ المستفيدين من منحة 5000 دج - السنة " + filterValue;
+
+        countDisplay.innerText = filteredData.length;
+        countPrint.innerText = filteredData.length;
+        render(filteredData);
+    }
+
+    function render(data) {
+        const body = document.getElementById('mainTable');
+        body.innerHTML = '';
+        data.forEach((s, i) => {
+            const actualIndex = students.indexOf(s);
+            body.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><img src="${s.img || 'https://via.placeholder.com/40'}" class="parent-img"></td>
+                    <td>${s.id}</td>
+                    <td>${s.slast}</td>
+                    <td>${s.sfirst}</td>
+                    <td>${s.birth || '-'}</td>
+                    <td style="color: blue; font-weight:bold;">${s.level}</td>
+                    <td><b>${s.plast}</b></td>
+                    <td>${s.pfirst}</td>
+                    <td>${s.ccp}</td>
+                    <td>${s.cat}</td>
+                    <td>${s.school || '-'}</td>
+                    <td>${s.city || '-'}</td>
+                    <td class="no-print"><button onclick="remove(${actualIndex})" style="cursor:pointer;">🗑️</button></td>
+                </tr>`;
+        });
+    }
+
+    function remove(idx) {
+        if(confirm("حذف هذا التلميذ؟")) {
+            students.splice(idx, 1);
+            localStorage.setItem('minha_relizane_v4', JSON.stringify(students));
+            updateView();
+        }
+    }
+
+    function exportData() {
+        if(students.length === 0) return alert("لا توجد بيانات لتصديرها");
+        const dataStr = JSON.stringify(students);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', 'minha_backup_' + new Date().toISOString().slice(0,10) + '.json');
+        linkElement.click();
+    }
+
+    function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+                if (Array.isArray(importedData)) {
+                    if(confirm("هل تريد دمج البيانات المستوردة مع القائمة الحالية؟ (إلغاء سيقوم باستبدال الكل)")) {
+                        students = [...students, ...importedData];
+                    } else {
+                        students = importedData;
+                    }
+                    localStorage.setItem('minha_relizane_v4', JSON.stringify(students));
+                    updateView();
+                }
+            } catch (err) { alert("الملف غير صالح."); }
+        };
+        reader.readAsText(file);
+    }
+
+    updateView();
+</script>
+</body>
+</html>
